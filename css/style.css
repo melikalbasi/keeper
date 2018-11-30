@@ -1,3 +1,94 @@
 body {
-    background-image: url(../images/Can-You-Feel-The-Love-Tonight.png);
+    background: #4568DC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
+    background: linear-gradient(to right, #B06AB3, #4568DC); 
+}
+
+.nav-bar {
+
+    background: #4568DC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
+    background: linear-gradient(to right, #B06AB3, #4568DC); 
+
+    position: fixed;
+    z-index: 2;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: 'Lobster', cursive;
+}
+
+h1, h5 {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.spacer {
+    width: 100%;
+    height: 60px;
+}
+
+.yes-button {
+    background: none;
+    border: 2px solid #4568DC; 
+    color: #4568DC;
+    display: inline-block;
+    width: 20%;
+}
+
+.yes-button:hover {
+    background: #4568DC;
+    border: 2px solid #4568DC; 
+    color: white;
+    display: inline-block;
+}
+
+.no-button {
+    background: none;
+    border: 2px solid #B06AB3;
+    color: #B06AB3;
+    display: inline-block;
+    width: 20%;
+}
+
+.no-button:hover {
+    background: #B06AB3;
+    border: 2px solid #B06AB3;
+    color: white;
+    display: inline-block;
+}
+
+.user-image {
+    border-radius: .25rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.user-image-card {
+    width: 80%;
+}
+
+.file-select {
+    display: none;
+}
+
+#chooseFileLabel, #submitButton {
+    background: none;
+    color: white;
+    border: 2px solid white;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: .25rem;
+    margin-top: 20px;
+}
+
+footer {
+    height: 50px;
 }

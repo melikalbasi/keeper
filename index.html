@@ -3,67 +3,78 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Keeping</title>
+    <title>Keeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap Links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    
-    <!-- css Link -->
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Jaldi|Lobster" rel="stylesheet">
 
-    
+    <!-- css Link -->
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
 </head>
 <body>
 
-  <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-      Is this a Keeper?
-    </a>
-  </nav>
-  
+  <nav class="container-fluid nav-bar">
+      <div class="row">
+          <div class="col-lg-3">
 
-
-
-        <!-- submit button -->
-        <div id="filesubmit">
-                <input type="file" class="file-select" accept="image/*"/>
-                <button class="file-submit">SUBMIT</button>
+          </div>
+          <div class="col-lg-6 text-center">
+              <div class="navbar-brand">
+                <h5>Is this a </h5>
+                <h1>Keeper?</h1>
               </div>
+          </div>
+          <div class="col-lg-3 d-flex justify-content-center align-items-center">
+              <!-- submit button -->
+              <div id="filesubmit">
+                <label for="chooseFile" id="chooseFileLabel">Upload Image
+                    <input type="file" id="chooseFile" class="file-select" accept="image/*"/>
+                </label>
+                <button class="file-submit" id="submitButton">SUBMIT</button>
+              </div>
+          </div>
+      </div>
+  </nav>
 
+  <div class="spacer"></div>
 
-              <!-- container -->
-              <div class="container">
-                    <div class="row">
+  <!-- container -->
+  <div class="container">
+    <div class="row">
 
-                        <!--border  -->
-                      <div class="col-lg-3">
-                      </div>
+      <!--border  -->
+      <div class="col-lg-3">
+      </div>
 
-                      <!-- image -->
-                      <div class="col-lg-6">
-                      </div>
+      <!-- image -->
+      <div class="col-lg-6">
+        <div class="d-flex justify-content-center align-items-center flex-column" id="imageDisplay"></div>
+      </div>
 
-                      <!-- border -->
-                      <div class="col-lg-3">
-                      </div>
-                      
-                    </div>
-                  </div>
+      <!-- border -->
+      <div class="col-lg-3">
+      </div>
+          
+    </div>
+  </div>
 
+  <footer></footer>
 
-<!-- Firebase Link -->
-<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+  <!-- Firebase Link -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 
-<!-- Bootstrap Javascript Link -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- Bootstrap Javascript Link -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<!-- Javascript Link -->
-<script src="javascript/app.js"></script>
+  <!-- Javascript Link -->
+  <script src="app.js"></script>
 
 </body>
 </html>
