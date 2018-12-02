@@ -120,8 +120,6 @@ $(document).on("click", ".vote-button", function(){
     var total;
     var url;
       
-    console.log(info);
-
     getImageInfo(imageSerialNumber).then(function(snap){
         
         console.log("Snap: " + snap);
@@ -155,8 +153,6 @@ $(document).on("click", ".vote-button", function(){
         });
     
     }).then(function(){
-        console.log("Here's what will happen next!");
-        // $("#" + imageSerialNumber).toggleClass("hide");
 
         var yesPercent = (yes / total) * 100;
         var noPercent = (no / total) * 100;
