@@ -157,7 +157,8 @@ $(document).on("click", ".vote-button", function(){
         var yesPercent = (yes / total) * 100;
         var noPercent = (no / total) * 100;
 
-        $("#" + imageSerialNumber).html("<h2>Yes: " + Math.round(yesPercent) + "% | No: " + Math.round(noPercent) + "%</h2>" );
+        $("#" + imageSerialNumber).html("<h2 class='magictime swashIn yesResults'>Yes: " + Math.round(yesPercent) + "%</h2>" + "<h2 class='magictime swashIn'> | </h2>" + "<h2 class='magictime swashIn noResults'>No: " + Math.round(noPercent) + "%</h2>" );
+
     });
 
 });
