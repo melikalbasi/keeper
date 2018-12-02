@@ -108,7 +108,7 @@ database.ref().on("child_added", function (snap) {
     card.append(img, buttonDiv);
 
     // append the card to the page
-    $("#imageDisplay").prepend(card);
+    $("#imageDisplay").append(card);
 
 });
 
