@@ -127,3 +127,10 @@ $(document).on("click", ".vote-button", function(){
     // display percentages
 
 });
+
+function getImageInfo(key){
+    return database.ref(key).once('value').then(function(snapshot) {
+        console.log("getImageInfo: " + snapshot.val());
+        return snapshot.val();
+    });
+}
