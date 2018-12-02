@@ -18,7 +18,10 @@ const database = firebase.database();
 // add change event listener to upload button
 // add click event listener to submit button
 document.querySelector(".file-select").addEventListener("change", handleFileUploadChange);
-document.querySelector(".file-submit").addEventListener("click", handleFileUploadSubmit);
+document.querySelector(".file-submit").addEventListener("click", function(){
+    $("#submitButton").toggleClass("submit-highlight");
+    handleFileUploadSubmit();
+});
 
 // declare variable for image url and selected file 
 var userImgURL;
@@ -29,6 +32,7 @@ function handleFileUploadChange(e) {
     // store files name in a variable selectedFile
     selectedFile = e.target.files[0];
     console.log(selectedFile)
+    $("#submitButton").toggleClass("submit-highlight magictime swashIn");
 }
 
 // declare function for handling the upload submit where an event is passed as an argument
