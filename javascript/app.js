@@ -114,9 +114,11 @@ $(document).on("click", ".vote-button", function(){
     var imageSerialNumber = $(this).attr("data-key");
     var buttonType = $(this).attr("data-y-n");
 
-    var info = database.ref(buttonKey).once('value').then(function(snapshot) {
-        return snapshot.val();
-    });
+    // Declare variables that will be assigned to the data stored in the database
+    var yes;
+    var no;
+    var total;
+    var url;
       
     console.log(info);
 
