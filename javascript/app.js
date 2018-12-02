@@ -122,9 +122,39 @@ $(document).on("click", ".vote-button", function(){
       
     console.log(info);
 
-    // set new values using the variable snapshot above (figure out how to read 'promises')
+    getImageInfo(imageSerialNumber).then(function(snap){
+        
+        console.log("Snap: " + snap);
+        
+        yes = snap.yes;
+        no = snap.no;
+        total = snap.total;
+        url = snap.url;
 
-    // display percentages
+        console.log("Yes: " + yes);
+        console.log("No: " + no);
+        console.log("Total: " + total);
+
+        if(buttonType === "yes"){
+            yes += 1;
+        } else if(buttonType === "no"){
+            no += 1;
+        }
+
+        total = yes + no;
+
+        console.log("2. Yes: " + yes);
+        console.log("2. No: " + no);
+        console.log("2. Total: " + total);
+
+        database.ref(imageSerialNumber).set({
+            url: url,
+            yes: yes,
+            no: no,
+            total: total
+        });
+    
+    })
 
 });
 
