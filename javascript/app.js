@@ -110,7 +110,9 @@ database.ref().on("child_added", function (snap) {
 
 $(document).on("click", ".vote-button", function(){
     
-    var buttonKey = $(this).attr("data-key");
+    // Assign variables to attributes "data-key" and "data-y-n", which indicate the serial number of the image the button is associated with and whether the button clicked was the "yes" or "no" button
+    var imageSerialNumber = $(this).attr("data-key");
+    var buttonType = $(this).attr("data-y-n");
 
     var info = database.ref(buttonKey).once('value').then(function(snapshot) {
         return snapshot.val();
