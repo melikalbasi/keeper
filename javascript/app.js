@@ -154,7 +154,15 @@ $(document).on("click", ".vote-button", function(){
             total: total
         });
     
-    })
+    }).then(function(){
+        console.log("Here's what will happen next!");
+        // $("#" + imageSerialNumber).toggleClass("hide");
+
+        var yesPercent = (yes / total) * 100;
+        var noPercent = (no / total) * 100;
+
+        $("#" + imageSerialNumber).html("<h2>Yes: " + Math.round(yesPercent) + "% | No: " + Math.round(noPercent) + "%</h2>" );
+    });
 
 });
 
