@@ -102,3 +102,10 @@ h1 {
 footer {
     height: 50px;
 }
+.yesResults {
+    font-family: 'Lobster Two', cursive;
+}
+
+.noResults {
+    font-family: 'Lobster Two', cursive;
+}
