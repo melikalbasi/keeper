@@ -10,17 +10,6 @@ var config = {
 // Pass Firebase credentials (above) into initializeApp method
 firebase.initializeApp(config);
 
-// JACOB's Firebase
-// var config = {
-//     apiKey: "AIzaSyCzA3Gh4GFhEQGjxd0jcO5eH0PS9t6eKsg",
-//     authDomain: "practice-6d391.firebaseapp.com",
-//     databaseURL: "https://practice-6d391.firebaseio.com",
-//     projectId: "practice-6d391",
-//     storageBucket: "practice-6d391.appspot.com",
-//     messagingSenderId: "619600814786"
-// };
-// firebase.initializeApp(config);
-
 // declare constant for firebase storage and storage reference and database
 const storageService = firebase.storage();
 const storageRef = storageService.ref();
@@ -87,7 +76,6 @@ database.ref().on("child_added", function (snap) {
 
     console.log(snap);
 
-    console.log(userImgURL);
     // dynamically generate html tags for img with src = image url
     var img = $("<img>").attr("src", snap.val().url);
     img.attr("class", "user-image")
@@ -95,14 +83,17 @@ database.ref().on("child_added", function (snap) {
     //dynamically generate a button with an attribute of bootstrap classes
     var yBtn = $("<button>").attr("class", "btn yes-button vote-button");
     yBtn.attr("data-key", snap.key);
+    yBtn.attr("data-y-n", "yes");
     yBtn.text("YES");
 
     //dynamically generate a button with an attribute of bootstrap classes
     var nBtn = $("<button>").attr("class", "btn no-button vote-button");
     nBtn.attr("data-key", snap.key);
+    nBtn.attr("data-y-n", "no");
     nBtn.text("NO");
 
-    var buttonDiv = $("<div>").attr("class", "d-flex flex-row justify-content-around")
+    var buttonDiv = $("<div>").attr("class", "d-flex flex-row justify-content-around");
+    buttonDiv.attr("id", snap.key);
 
     buttonDiv.append(yBtn, nBtn);
 
@@ -119,16 +110,61 @@ database.ref().on("child_added", function (snap) {
 
 $(document).on("click", ".vote-button", function(){
     
-    var buttonKey = $(this).attr("data-key");
+    // Assign variables to attributes "data-key" and "data-y-n", which indicate the serial number of the image the button is associated with and whether the button clicked was the "yes" or "no" button
+    var imageSerialNumber = $(this).attr("data-key");
+    var buttonType = $(this).attr("data-y-n");
 
-    var info = database.ref(buttonKey).once('value').then(function(snapshot) {
-        return snapshot.val();
-    });
+    // Declare variables that will be assigned to the data stored in the database
+    var yes;
+    var no;
+    var total;
+    var url;
       
-    console.log(info);
+    getImageInfo(imageSerialNumber).then(function(snap){
+        
+        console.log("Snap: " + snap);
+        
+        yes = snap.yes;
+        no = snap.no;
+        total = snap.total;
+        url = snap.url;
 
-    // set new values using the variable snapshot above (figure out how to read 'promises')
+        console.log("Yes: " + yes);
+        console.log("No: " + no);
+        console.log("Total: " + total);
 
-    // display percentages
+        if(buttonType === "yes"){
+            yes += 1;
+        } else if(buttonType === "no"){
+            no += 1;
+        }
+
+        total = yes + no;
+
+        console.log("2. Yes: " + yes);
+        console.log("2. No: " + no);
+        console.log("2. Total: " + total);
+
+        database.ref(imageSerialNumber).set({
+            url: url,
+            yes: yes,
+            no: no,
+            total: total
+        });
+    
+    }).then(function(){
+
+        var yesPercent = (yes / total) * 100;
+        var noPercent = (no / total) * 100;
+
+        $("#" + imageSerialNumber).html("<h2>Yes: " + Math.round(yesPercent) + "% | No: " + Math.round(noPercent) + "%</h2>" );
+    });
 
 });
+
+function getImageInfo(key){
+    return database.ref(key).once('value').then(function(snapshot) {
+        console.log("getImageInfo: " + snapshot.val());
+        return snapshot.val();
+    });
+}
