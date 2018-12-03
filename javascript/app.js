@@ -150,6 +150,32 @@ $(document).on("click", ".image-wrapper", function(){
         
         $(thisRef).attr("data-displayed", "true");
         
+        if(userLatitude !== "" && userLongitude !== "" && retailerData !== ""){
+
+            jQuery.ajaxPrefilter(function (options) {
+                if (options.crossDomain && jQuery.support.cors) {
+                    options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+                }
+            });
+    
+            var queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + userLatitude + "," + userLongitude + "&radius=1500&type=clothing_store&keyword=" + retailerData + "&key=AIzaSyAuXp4DdKaYR75c5vtwcbYzYCGrxZK5NjM";
+
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            }).then(function (response) {
+                console.log(response);
+                var retailerInfo = $("<div>").attr("class", "magictime swashIn text-center");
+                retailerInfo.append("<h6 class='retailResults'><strong>Item found at:</strong> " + response.results[0].name + "</h6>");
+                retailerInfo.append("<p class='retailResults'><strong>Address:</strong> " + response.results[0].vicinity + "</p>");
+                
+                retailDiv.html(retailerInfo);
+            });
+    
+        }
 
     }
     
