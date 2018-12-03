@@ -201,6 +201,7 @@ $(document).on("click", ".vote-button", function(){
         no = snap.no;
         total = snap.total;
         url = snap.url;
+        retailer = snap.retailer;
 
         console.log("Yes: " + yes);
         console.log("No: " + no);
@@ -222,7 +223,8 @@ $(document).on("click", ".vote-button", function(){
             url: url,
             yes: yes,
             no: no,
-            total: total
+            total: total,
+            retailer: retailer
         });
     
     }).then(function(){
@@ -241,4 +243,17 @@ function getImageInfo(key){
         console.log("getImageInfo: " + snapshot.val());
         return snapshot.val();
     });
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    userLatitude = position.coords.latitude;
+    userLongitude = position.coords.longitude;
 }
