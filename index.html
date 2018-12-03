@@ -23,10 +23,10 @@
 
   <nav class="container-fluid nav-bar">
       <div class="row">
-          <div class="col-lg-3">
+          <div class="col-lg-4">
 
           </div>
-          <div class="col-lg-6 text-center">
+          <div class="col-lg-4 text-center">
               <a href="#footer">
                 <div class="navbar-brand">
                   <h5>Is this a </h5>
@@ -34,12 +34,13 @@
                 </div>
               </a>
           </div>
-          <div class="col-lg-3 d-flex justify-content-center align-items-center">
+          <div class="col-lg-4 d-flex justify-content-center align-items-center">
               <!-- submit button -->
               <div id="filesubmit">
                 <label for="chooseFile" id="chooseFileLabel">Upload Image
                     <input type="file" id="chooseFile" class="file-select" accept="image/*"/>
                 </label>
+                <input type="text" name="retailer" id="retailer" class="form-control" placeholder="Retailer of Your Item" required>
                 <button class="file-submit" id="submitButton">SUBMIT</button>
               </div>
           </div>
@@ -77,6 +78,13 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <!-- popper.js -->
+  <script src="https://unpkg.com/popper.js@1.14.6/dist/umd/popper.min.js"></script>
 
   <!-- Javascript Link -->
   <script src="javascript/app.js"></script>

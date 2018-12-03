@@ -15,17 +15,31 @@ const storageService = firebase.storage();
 const storageRef = storageService.ref();
 const database = firebase.database();
 
-// add change event listener to upload button
-// add click event listener to submit button
-document.querySelector(".file-select").addEventListener("change", handleFileUploadChange);
-document.querySelector(".file-submit").addEventListener("click", function(){
-    $("#submitButton").toggleClass("submit-highlight");
-    handleFileUploadSubmit();
-});
+// Add popovers
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
 
 // declare variable for image url and selected file 
 var userImgURL;
 var selectedFile;
+var retailer = "";
+var userLatitude = "";
+var userLongitude = "";
+
+getLocation();
+
+// add change event listener to upload button
+// add click event listener to submit button
+document.querySelector(".file-select").addEventListener("change", handleFileUploadChange);
+document.querySelector(".file-submit").addEventListener("click", function(){
+    retailer = $("#retailer").val().trim();
+    $("#retailer").val("");
+    $("#submitButton").toggleClass("submit-highlight");
+    $("#retailer").toggleClass("show-retailer");
+    handleFileUploadSubmit();
+});
+
 
 // declare function for handling the upload change, the event passed is name of the selected file
 function handleFileUploadChange(e) {
@@ -33,6 +47,7 @@ function handleFileUploadChange(e) {
     selectedFile = e.target.files[0];
     console.log(selectedFile)
     $("#submitButton").toggleClass("submit-highlight magictime swashIn");
+    $("#retailer").toggleClass("show-retailer magictime swashIn");
 }
 
 // declare function for handling the upload submit where an event is passed as an argument
@@ -64,6 +79,7 @@ function handleFileUploadSubmit(e) {
             database.ref().push({
                 // set key of url to contain the download url 
                 url: downloadURL,
+                retailer: retailer,
                 yes: 0,
                 no: 0,
                 total: 0
@@ -79,6 +95,10 @@ function handleFileUploadSubmit(e) {
 database.ref().on("child_added", function (snap) {
 
     console.log(snap);
+
+    var imgWrapper = $("<div>").attr("class", "image-wrapper");
+    imgWrapper.attr("data-displayed", "false");
+    imgWrapper.attr("data-retailer", snap.val().retailer);
 
     // dynamically generate html tags for img with src = image url
     var img = $("<img>").attr("src", snap.val().url);
