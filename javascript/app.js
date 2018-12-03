@@ -175,6 +175,10 @@ $(document).on("click", ".image-wrapper", function(){
                 retailDiv.html(retailerInfo);
             });
     
+        } else {
+            var noResultsDiv = $("<div>").append('<h5 class="retailResults"><em>Allow location services to search for retailers in your area.</em></h5>');
+            
+            retailDiv.html(noResultsDiv);
         }
 
     }
