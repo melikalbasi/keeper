@@ -139,3 +139,25 @@ footer {
 .retailResults {
     font-family: 'Courier New', Courier, monospace;
 }
+
+
+
+/* iPhone X */
+@media screen and (min-width: 375px) and (max-width: 667px) {
+    .spacer {
+
+        height: 130px;
+    }
+    #chooseFileLabel {
+        background: none;
+        color: white;
+        border: 2px solid white;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: .25rem;
+        margin: 10px 0;
+        transition: all 300ms;
+}
+
+}
