@@ -133,6 +133,16 @@ database.ref().on("child_added", function (snap) {
 
 });
 
+$(document).on("click", ".image-wrapper", function(){
+    
+    var dataDisplayed = $(this).attr("data-displayed");
+    var retailerData = $(this).attr("data-retailer");
+    var thisRef = this;
+    
+    console.log(retailerData);
+    
+});
+
 $(document).on("click", ".vote-button", function(){
     
     // Assign variables to attributes "data-key" and "data-y-n", which indicate the serial number of the image the button is associated with and whether the button clicked was the "yes" or "no" button
