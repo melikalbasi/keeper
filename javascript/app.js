@@ -16,9 +16,9 @@ const storageRef = storageService.ref();
 const database = firebase.database();
 
 // Add popovers
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
+// $(function () {
+//     $('[data-toggle="popover"]').popover()
+// })
 
 // declare variable for image url and selected file 
 var userImgURL;
@@ -150,7 +150,7 @@ $(document).on("click", ".image-wrapper", function(){
         
         $(thisRef).attr("data-displayed", "true");
         
-        if(userLatitude !== "" && userLongitude !== "" && retailerData !== ""){
+        if(userLatitude !== "" && userLongitude !== "" && retailerData !== "true"){
 
             jQuery.ajaxPrefilter(function (options) {
                 if (options.crossDomain && jQuery.support.cors) {
@@ -192,6 +192,7 @@ $(document).on("click", ".vote-button", function(){
     var no;
     var total;
     var url;
+    var retailerDB;
       
     getImageInfo(imageSerialNumber).then(function(snap){
         
@@ -201,7 +202,7 @@ $(document).on("click", ".vote-button", function(){
         no = snap.no;
         total = snap.total;
         url = snap.url;
-        retailer = snap.retailer;
+        retailerDB = snap.retailer;
 
         console.log("Yes: " + yes);
         console.log("No: " + no);
@@ -224,7 +225,7 @@ $(document).on("click", ".vote-button", function(){
             yes: yes,
             no: no,
             total: total,
-            retailer: retailer
+            retailer: retailerDB
         });
     
     }).then(function(){
