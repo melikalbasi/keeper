@@ -119,13 +119,14 @@ database.ref().on("child_added", function (snap) {
     var buttonDiv = $("<div>").attr("class", "d-flex flex-row justify-content-around");
     buttonDiv.attr("id", snap.key);
 
+    imgWrapper.append(img);
     buttonDiv.append(yBtn, nBtn);
 
     // dynamically generate a bootstrap card  
     var card = $("<div>").attr("class", "card p-3 mt-3 user-image-card");
 
     // append image and buttons to the card
-    card.append(img, buttonDiv);
+    card.append(imgWrapper, buttonDiv);
 
     // append the card to the page
     $("#imageDisplay").append(card);
