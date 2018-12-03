@@ -18,7 +18,7 @@ Add additional notes about how to deploy this on a live system
 
 * [Google Firestore API](https://cloud.google.com/firestore/docs/reference/rest/) - Used to store images in our Firebase
 * [Google Places API](https://developers.google.com/places/) - Used to generate nearby retailers
-* [Magic] (https://www.minimamente.com/example/magic_animations/) - Used to give visual feedback to users when events occur on the page
+* [Magic](https://www.minimamente.com/example/magic_animations/) - Used to give visual feedback to users when events occur on the page
 * [HTML] - markup language
 * [CSS] - styling
 * [Bootstrap] - website framework
