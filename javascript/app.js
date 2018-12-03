@@ -140,6 +140,18 @@ $(document).on("click", ".image-wrapper", function(){
     var thisRef = this;
     
     console.log(retailerData);
+
+    if(dataDisplayed === "false"){
+
+        var retailDiv = $("<div>").append("<h5 class='retailResults'>Loading...</h5>");
+        retailDiv.addClass("text-center mb-2");
+    
+        $(thisRef).append(retailDiv);
+        
+        $(thisRef).attr("data-displayed", "true");
+        
+
+    }
     
 });
 
