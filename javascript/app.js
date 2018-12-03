@@ -15,17 +15,31 @@ const storageService = firebase.storage();
 const storageRef = storageService.ref();
 const database = firebase.database();
 
-// add change event listener to upload button
-// add click event listener to submit button
-document.querySelector(".file-select").addEventListener("change", handleFileUploadChange);
-document.querySelector(".file-submit").addEventListener("click", function(){
-    $("#submitButton").toggleClass("submit-highlight");
-    handleFileUploadSubmit();
-});
+// Add popovers
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
 
 // declare variable for image url and selected file 
 var userImgURL;
 var selectedFile;
+var retailer = "";
+var userLatitude = "";
+var userLongitude = "";
+
+getLocation();
+
+// add change event listener to upload button
+// add click event listener to submit button
+document.querySelector(".file-select").addEventListener("change", handleFileUploadChange);
+document.querySelector(".file-submit").addEventListener("click", function(){
+    retailer = $("#retailer").val().trim();
+    $("#retailer").val("");
+    $("#submitButton").toggleClass("submit-highlight");
+    $("#retailer").toggleClass("show-retailer");
+    handleFileUploadSubmit();
+});
+
 
 // declare function for handling the upload change, the event passed is name of the selected file
 function handleFileUploadChange(e) {
@@ -33,6 +47,7 @@ function handleFileUploadChange(e) {
     selectedFile = e.target.files[0];
     console.log(selectedFile)
     $("#submitButton").toggleClass("submit-highlight magictime swashIn");
+    $("#retailer").toggleClass("show-retailer magictime swashIn");
 }
 
 // declare function for handling the upload submit where an event is passed as an argument
@@ -64,6 +79,7 @@ function handleFileUploadSubmit(e) {
             database.ref().push({
                 // set key of url to contain the download url 
                 url: downloadURL,
+                retailer: retailer,
                 yes: 0,
                 no: 0,
                 total: 0
@@ -79,6 +95,10 @@ function handleFileUploadSubmit(e) {
 database.ref().on("child_added", function (snap) {
 
     console.log(snap);
+
+    var imgWrapper = $("<div>").attr("class", "image-wrapper");
+    imgWrapper.attr("data-displayed", "false");
+    imgWrapper.attr("data-retailer", snap.val().retailer);
 
     // dynamically generate html tags for img with src = image url
     var img = $("<img>").attr("src", snap.val().url);
@@ -99,17 +119,66 @@ database.ref().on("child_added", function (snap) {
     var buttonDiv = $("<div>").attr("class", "d-flex flex-row justify-content-around");
     buttonDiv.attr("id", snap.key);
 
+    imgWrapper.append(img);
     buttonDiv.append(yBtn, nBtn);
 
     // dynamically generate a bootstrap card  
     var card = $("<div>").attr("class", "card p-3 mt-3 user-image-card");
 
     // append image and buttons to the card
-    card.append(img, buttonDiv);
+    card.append(imgWrapper, buttonDiv);
 
     // append the card to the page
     $("#imageDisplay").append(card);
 
+});
+
+$(document).on("click", ".image-wrapper", function(){
+    
+    var dataDisplayed = $(this).attr("data-displayed");
+    var retailerData = $(this).attr("data-retailer");
+    var thisRef = this;
+    
+    console.log(retailerData);
+
+    if(dataDisplayed === "false"){
+
+        var retailDiv = $("<div>").append("<h5 class='retailResults'>Loading...</h5>");
+        retailDiv.addClass("text-center mb-2");
+    
+        $(thisRef).append(retailDiv);
+        
+        $(thisRef).attr("data-displayed", "true");
+        
+        if(userLatitude !== "" && userLongitude !== "" && retailerData !== ""){
+
+            jQuery.ajaxPrefilter(function (options) {
+                if (options.crossDomain && jQuery.support.cors) {
+                    options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+                }
+            });
+    
+            var queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + userLatitude + "," + userLongitude + "&radius=1500&type=clothing_store&keyword=" + retailerData + "&key=AIzaSyAuXp4DdKaYR75c5vtwcbYzYCGrxZK5NjM";
+
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            }).then(function (response) {
+                console.log(response);
+                var retailerInfo = $("<div>").attr("class", "magictime swashIn text-center");
+                retailerInfo.append("<h6 class='retailResults'><strong>Item found at:</strong> " + response.results[0].name + "</h6>");
+                retailerInfo.append("<p class='retailResults'><strong>Address:</strong> " + response.results[0].vicinity + "</p>");
+                
+                retailDiv.html(retailerInfo);
+            });
+    
+        }
+
+    }
+    
 });
 
 $(document).on("click", ".vote-button", function(){
@@ -132,6 +201,7 @@ $(document).on("click", ".vote-button", function(){
         no = snap.no;
         total = snap.total;
         url = snap.url;
+        retailer = snap.retailer;
 
         console.log("Yes: " + yes);
         console.log("No: " + no);
@@ -153,7 +223,8 @@ $(document).on("click", ".vote-button", function(){
             url: url,
             yes: yes,
             no: no,
-            total: total
+            total: total,
+            retailer: retailer
         });
     
     }).then(function(){
@@ -172,4 +243,17 @@ function getImageInfo(key){
         console.log("getImageInfo: " + snapshot.val());
         return snapshot.val();
     });
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    userLatitude = position.coords.latitude;
+    userLongitude = position.coords.longitude;
 }
