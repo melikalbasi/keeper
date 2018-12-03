@@ -88,11 +88,15 @@ h1 {
     padding: 6px 12px;
     cursor: pointer;
     border-radius: .25rem;
-    margin-top: 20px;
+    margin: 20px 0 0 0;
     transition: all 300ms;
 }
 
 #submitButton {
+    display: none;
+}
+
+#retailer {
     display: none;
 }
 
@@ -102,9 +106,8 @@ h1 {
     border: 2px solid white;
     display: inline-block;
     padding: 6px 12px;
-    cursor: pointer;
     border-radius: .25rem;
-    margin-top: 20px;
+    margin: 20px 0 0 0;
 }
 
 .submit-highlight {
@@ -113,9 +116,13 @@ h1 {
     border: 2px solid white!important;
     display: inline-block!important;
     padding: 6px 12px!important;
-    cursor: pointer!important;
     border-radius: .25rem!important;
     margin-top: 20px!important;
+}
+
+.show-retailer {
+    display: block!important;
+    margin-top: 10px!important;
 }
 
 footer {
@@ -127,4 +134,8 @@ footer {
 
 .noResults {
     font-family: 'Lobster Two', cursive;
+}
+
+.retailResults {
+    font-family: 'Courier New', Courier, monospace;
 }
