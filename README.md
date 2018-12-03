@@ -12,7 +12,7 @@ After you've done so, simply navigate to 'Upload Image' to the right side of our
 
 # Deployment
 
-Add additional notes about how to deploy this on a live system
+You can visit our deployed site [here](https://melikalbasi.github.io/Keeper_App/).
 
 # Built With
 
