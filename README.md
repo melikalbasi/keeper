@@ -3,7 +3,6 @@
 Keeper is a fashion application where users can interact in two ways. Users may request the opinions of other users by uploading images of items of clothing (whether it be tried on in a fitting room, on the hanger, or dug up from their closet), each image uploaded will be displayed on its own card where people can vote "Yes" or "No" on the question our app asks.. "Is this a keeper?" This is when users who are visiting as spectators can chime in their votes on whether the image uploaded is a keeper or not. Poll results will be displayed after each vote. Our app allows for only one vote to be made on each card unless the user decides to refresh the page wherein the app will reload with all the vote results hidden again. Our app allows for live uploads so you can continue to scroll down the page and continue voting on new uploads! [You can even find out what store an item is from and find the nearest store location near you (see 'Getting Started' below)]
 
 ![App Image Desktop](images/KeeperImage.png)
-![App Image Phone](images/KeeperonPhone.PNG)
 
 # Getting Started
 
